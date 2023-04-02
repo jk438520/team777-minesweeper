@@ -1,4 +1,4 @@
-package com.example.minesweeper;
+package com.io.minesweeper;
 
 import org.junit.Test;
 
