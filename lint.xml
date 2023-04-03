@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Sample lint.xml file, feel free to adjust. -->
+    <!-- Check https://developer.android.com/studio/write/lint for more information. -->
+    
+    <!-- Make IconMissingDensityFolder informational.  -->
+    <issue id="IconMissingDensityFolder" severity="informational" />
+
+    <!-- Ignore the ObsoleteLayoutParam issue in the specified files -->
+    <issue id="ObsoleteLayoutParam">
+        <ignore path="res/layout/activation.xml" />
+        <ignore path="res/layout-xlarge/activation.xml" />
+    </issue>/>
+</lint>
