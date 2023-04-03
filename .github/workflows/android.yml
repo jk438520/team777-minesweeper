@@ -22,6 +22,8 @@ jobs:
         
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: false
       
       - name: Run Lint
         run: ./gradlew lint
@@ -48,6 +50,8 @@ jobs:
         
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: false
       
       - name: Run Debug Tests
         run: ./gradlew testDebug --continue
@@ -75,6 +79,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: 7.4.2
+          cache-read-only: false
         
       - name: AVD cache
         uses: actions/cache@v3
