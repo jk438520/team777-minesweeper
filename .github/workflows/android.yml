@@ -3,7 +3,7 @@ name: Android Lint and Test
 on:
   workflow_dispatch:
   pull_request:
-
+  push:
 
 jobs:
   lint_job:
