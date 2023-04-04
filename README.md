@@ -1,3 +1,7 @@
+# Android minesweeper game
+
+Simple Android minesweeper game written in Java.
+
 ## Gradle commands
 
 ### Lint check
