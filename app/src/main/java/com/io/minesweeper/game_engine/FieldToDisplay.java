@@ -9,21 +9,21 @@ public class FieldToDisplay {
         UNFLAG
     }
 
-    public final int x;
-    public final int y;
+    public final int row;
+    public final int col;
     public final int value;
     public final FieldEvent event;
 
-    public FieldToDisplay(int x, int y, int value, FieldEvent event) {
-        this.x = x;
-        this.y = y;
+    public FieldToDisplay(int row, int col, int value, FieldEvent event) {
+        this.row = row;
+        this.col = col;
         this.value = value;
         this.event = event;
     }
 
-    public FieldToDisplay(int x, int y, FieldEvent event) {
-        this.x = x;
-        this.y = y;
+    public FieldToDisplay(int row, int col, FieldEvent event) {
+        this.row = row;
+        this.col = col;
         this.value = 0;
         this.event = event;
     }

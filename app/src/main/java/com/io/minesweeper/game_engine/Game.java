@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Game {
+
     enum ClickMode {
         BOMB,
         FLAG
@@ -127,6 +128,15 @@ public class Game {
                     break;
             }
         }
+        //if game is over, reveal all fields
+        if(gameStatus != GameStatus.PLAYING){
+            for(int i=0; i<X; i++)
+                for(int j=0; j<Y; j++)
+                    if(fields[i][j].getState() != Field.State.FLAGGED)
+                        ftd.addAll(fields[i][j].reveal());
+        }
+
+
         return new GameState(gameStatus, ftd);
     }
 
