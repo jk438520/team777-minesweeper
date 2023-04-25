@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Minesweeper</string>
+    <string name="restart">Restart</string>
+    <string name="restart_button">Restart button</string>
+    <string name="set_flag_button" />
+    <string name="lol">LOL</string>
+    <string name="flag_mode_toggle">Flag mode toggle</string>
+    <string name="reset_button">Reset button</string>
+</resources>
