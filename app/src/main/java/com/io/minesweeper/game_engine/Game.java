@@ -16,9 +16,10 @@ public class Game {
         WON,
         LOST
     }
-    private final int X;
-    private final int Y;
+    private final int HEIGHT;
+    private final int WIDTH;
 
+    private boolean firstClick = true;
     private int fieldsLeft;
     private final int ALL_MINES;
     private ClickMode clickMode = ClickMode.BOMB;
@@ -30,38 +31,26 @@ public class Game {
     public GameState lastGameState = null;
 
     public Game(int width, int height, int allMines) {
-        //X = width;
-        //Y = height;
-        X = height;
-        Y = width;
+        WIDTH = width;
+        HEIGHT = height;
         ALL_MINES = allMines;
         fieldsLeft = width * height - allMines;
-        int minesToPlant = allMines;
-        //fields = new Field[width][height];
         fields = new Field[height][width];
-        for (int i = 0; i < height && minesToPlant > 0; i=(i+1)%width) {
+        for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                int randVal = ThreadLocalRandom.current().nextInt(0, width * height);
-                if(randVal < allMines && fields[i][j] == null && minesToPlant > 0) {
-                    fields[i][j] = new Mine(i, j);
-                    minesToPlant--;
-                }
+                fields[i][j] = new EmptyField(i, j);
             }
         }
-        for(int i=0; i<height; i++)
-            for(int j=0; j<width; j++)
-                if(fields[i][j] == null)
-                    fields[i][j] = new EmptyField(i, j);
-        connectNeighbors();
     }
 
     public Game(boolean[][] fields){
-        Y = fields.length;
-        X = fields[0].length;
-        this.fields = new Field[X][Y];
+        firstClick = false;
+        HEIGHT = fields.length;
+        WIDTH = fields[0].length;
+        this.fields = new Field[HEIGHT][WIDTH];
         int tempAllMines = 0;
-        for(int i=0; i<Y; i++) {
-            for (int j = 0; j < X; j++) {
+        for(int i=0; i<HEIGHT; i++) {
+            for (int j = 0; j < WIDTH; j++) {
                 if (fields[i][j]) {
                     this.fields[i][j] = new Mine(i, j);
                     tempAllMines++;
@@ -75,12 +64,12 @@ public class Game {
         connectNeighbors();
     }
 
-    public int getNumberOnField(int x, int y) {
+    public int getNumberOnField(int row, int column) {
         int number = 0;
         for(int i=-1; i<=1; i++)
             for(int j=-1; j<=1; j++)
-                if(x+i >= 0 && x+i < X && y+j >= 0 && y+j < Y)
-                    if(fields[x+i][y+j].isMine())
+                if(row+i >= 0 && row+i < HEIGHT && column+j >= 0 && column+j < WIDTH)
+                    if(fields[row+i][column+j].isMine())
                         number++;
         return number;
     }
@@ -95,12 +84,32 @@ public class Game {
     }
 
     private void connectNeighbors(){
-        for(int i=0; i<X; i++)
-            for(int j=0; j<Y; j++)
+        for(int i=0; i<HEIGHT; i++)
+            for(int j=0; j<WIDTH; j++)
                 for(int k=-1; k<=1; k++)
                     for(int l=-1; l<=1; l++)
-                        if(i+k >= 0 && i+k < X && j+l >= 0 && j+l < Y && !(k==0 && l==0))
+                        if(i+k >= 0 && i+k < HEIGHT && j+l >= 0 && j+l < WIDTH && !(k==0 && l==0))
                             fields[i][j].addNeighbour(fields[i+k][j+l]);
+    }
+
+    private void generateMines(int row, int column) {
+        int fieldsToAssess = HEIGHT * WIDTH - 1;
+        int minesToPlant = ALL_MINES;
+        for(int i=0; i<HEIGHT; i++){
+            for (int j = 0; j < WIDTH; j++) {
+                if (i == row && j == column)
+                    continue;
+                boolean isFlagged = fields[i][j].getState() == Field.State.FLAGGED;
+                if (ThreadLocalRandom.current().nextInt(0, fieldsToAssess) < minesToPlant) {
+                    fields[i][j] = new Mine(i, j);
+                    if(isFlagged)
+                        fields[i][j].toggleFlag();
+                    minesToPlant--;
+                }
+                fieldsToAssess--;
+            }
+        }
+        connectNeighbors();
     }
 
     public GameState click(int row, int column){
@@ -108,6 +117,10 @@ public class Game {
         List<FieldToDisplay> ftd;
         switch (clickMode) {
             case BOMB:
+                if(firstClick){
+                    generateMines(row, column);
+                    firstClick = false;
+                }
                 ftd = fields[row][column].reveal();
                 break;
             case FLAG:
@@ -137,13 +150,11 @@ public class Game {
         }
         //if game is over, reveal all fields
         if(gameStatus != GameStatus.PLAYING){
-            for(int i=0; i<X; i++)
-                for(int j=0; j<Y; j++)
+            for(int i=0; i<HEIGHT; i++)
+                for(int j=0; j<WIDTH; j++)
                     if(fields[i][j].getState() != Field.State.FLAGGED)
                         ftd.addAll(fields[i][j].reveal());
         }
-
-
         return new GameState(gameStatus, ftd);
     }
 
