@@ -155,8 +155,6 @@ public class Game {
                     if(fields[i][j].getState() != Field.State.FLAGGED)
                         ftd.addAll(fields[i][j].reveal());
         }
-
-
         return new GameState(gameStatus, ftd);
     }
 
