@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     int numberOfMines = 30;
     Game currentGame;
     GameState currentGameState;
+
+    GameChronometer chronometer;
 
     @SuppressLint("ResourceType")
     @Override
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout boardView = findViewById(R.id.boardView);
         setFlag = findViewById(R.id.setFlag);
         restart = findViewById(R.id.restart);
+        chronometer = new GameChronometer(findViewById(R.id.chronometer));
 
         setFlag.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     imageButton = findViewById(i);
                     imageButton.setImageResource(R.drawable.blank);
                 }
+                chronometer.restartClick();
             }
         });
 
@@ -96,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
                 button.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
+                        chronometer.tileClick();
                         int id = v.getId();
                         int helperId;
                         ImageButton changedButton;
@@ -147,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         if (currentGameState.gameStatus != Game.GameStatus.PLAYING) {
+                            chronometer.stop();
                             String mess = " ";
                             if (currentGameState.gameStatus == Game.GameStatus.WON) {
                                 mess = "You won! Congratulations!";
