@@ -111,7 +111,6 @@ public class Game {
         }
         connectNeighbors();
     }
-
     public GameState click(int row, int column){
         GameState gs;
         List<FieldToDisplay> ftd;
@@ -124,7 +123,10 @@ public class Game {
                 ftd = fields[row][column].reveal();
                 break;
             case FLAG:
-                ftd = fields[row][column].toggleFlag();
+                if(fields[row][column].getState() == Field.State.REVEALED)
+                    ftd = fields[row][column].reveal();
+                else
+                    ftd = fields[row][column].toggleFlag();
                 break;
             default:
                 gs = new GameState(gameStatus);
@@ -162,4 +164,6 @@ public class Game {
         this.clickMode = clickMode;
     }
     public ClickMode getClickMode() { return this.clickMode; }
+
+
 }

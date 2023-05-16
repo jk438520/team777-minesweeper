@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton setFlag;
     ImageButton restart;
     int numberOfColumns = 10;
-    int numberOfRows = 14;
+    int numberOfRows = 12;
     int numberOfMines = 30;
     Game currentGame;
     GameState currentGameState;
