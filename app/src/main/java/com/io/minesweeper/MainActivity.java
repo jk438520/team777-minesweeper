@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int numberOfMines = numberOfColumns * numberOfRows * bombSaturation / 100;
     Game currentGame;
     GameState currentGameState;
+
+    GameChronometer chronometer;
 
     @SuppressLint("ResourceType")
     @Override
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayout boardView = findViewById(R.id.boardView);
         setFlag = findViewById(R.id.setFlag);
         restart = findViewById(R.id.restart);
+        chronometer = new GameChronometer(findViewById(R.id.chronometer));
 
         setFlag.setOnClickListener(v -> {
             Game.ClickMode currentMode = currentGame.getClickMode();
@@ -63,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             else { // currentMode == Game.ClickMode.FLAG
                 currentGame.setClickMode(Game.ClickMode.BOMB);
-                ((ImageButton)v).setImageResource(R.drawable.blank);
+                ((ImageButton)v).setImageResource(R.drawable.bomb);
             }
         });
 
@@ -76,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 imageButton = findViewById(i);
                 imageButton.setImageResource(R.drawable.blank);
             }
+            chronometer.restartClick();
         });
 
         float scale = getResources().getDisplayMetrics().density;
@@ -111,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        chronometer.tileClick();
         int id = view.getId();
         int helperId;
         ImageButton changedButton;
@@ -138,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         if (currentGameState.gameStatus != Game.GameStatus.PLAYING) {
+            chronometer.stop();
             String mess;
             if (currentGameState.gameStatus == Game.GameStatus.WON) {
                 mess = "You won! Congratulations!";
