@@ -3,6 +3,7 @@ package com.io.minesweeper;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -16,13 +17,15 @@ import com.io.minesweeper.game_engine.FieldToDisplay;
 import com.io.minesweeper.game_engine.Game;
 import com.io.minesweeper.game_engine.GameState;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    DisplayMetrics displayMetrics;
+    int bombSaturation = 30;
     ImageButton setFlag;
     ImageButton restart;
-    int numberOfColumns = 10;
-    int numberOfRows = 14;
-    int numberOfMines = 30;
+    int numberOfColumns = 15;
+    int numberOfRows = numberOfColumns * 16 / 9;
+    int numberOfMines = numberOfColumns * numberOfRows * bombSaturation / 100;
     Game currentGame;
     GameState currentGameState;
 
@@ -32,44 +35,46 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        displayMetrics = new DisplayMetrics();
+
+        Intent intent = getIntent();
+        numberOfColumns = intent.getIntExtra("columns", 10);
+        numberOfRows = intent.getIntExtra("rows", 14);
+        numberOfMines = intent.getIntExtra("bombSaturation", 20)
+                        * numberOfColumns * numberOfRows / 100;
+
         currentGame = new Game(numberOfColumns, numberOfRows, numberOfMines);
         currentGameState = new GameState(currentGame.getGameStatus());
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
         int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
-        int paddingDp = 20;
+        int paddingDp = 5;
 
         LinearLayout boardView = findViewById(R.id.boardView);
         setFlag = findViewById(R.id.setFlag);
         restart = findViewById(R.id.restart);
 
-        setFlag.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Game.ClickMode currentMode = currentGame.getClickMode();
-                if (currentMode == Game.ClickMode.BOMB) {
-                    currentGame.setClickMode(Game.ClickMode.FLAG);
-                    ((ImageButton)v).setImageResource(R.drawable.smiley_face);
-                }
-                else { // currentMode == Game.ClickMode.FLAG
-                    currentGame.setClickMode(Game.ClickMode.BOMB);
-                    ((ImageButton)v).setImageResource(R.drawable.flag);
-                }
+        setFlag.setOnClickListener(v -> {
+            Game.ClickMode currentMode = currentGame.getClickMode();
+            if (currentMode == Game.ClickMode.BOMB) {
+                currentGame.setClickMode(Game.ClickMode.FLAG);
+                ((ImageButton)v).setImageResource(R.drawable.flag);
+            }
+            else { // currentMode == Game.ClickMode.FLAG
+                currentGame.setClickMode(Game.ClickMode.BOMB);
+                ((ImageButton)v).setImageResource(R.drawable.blank);
             }
         });
 
-        restart.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ImageButton imageButton;
-                currentGame = new Game(numberOfColumns, numberOfRows, numberOfMines);
-                currentGameState = new GameState(currentGame.getGameStatus());
-                int max = numberOfRows * numberOfColumns;
-                for (int i = 0; i < max; ++i) {
-                    imageButton = findViewById(i);
-                    imageButton.setImageResource(R.drawable.blank);
-                }
+        restart.setOnClickListener(v -> {
+            ImageButton imageButton;
+            currentGame = new Game(numberOfColumns, numberOfRows, numberOfMines);
+            currentGameState = new GameState(currentGame.getGameStatus());
+            int max = numberOfRows * numberOfColumns;
+            for (int i = 0; i < max; ++i) {
+                imageButton = findViewById(i);
+                imageButton.setImageResource(R.drawable.blank);
             }
         });
 
@@ -94,76 +99,52 @@ public class MainActivity extends AppCompatActivity {
                         btnHeight
                 ));
 
-                button.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        int id = v.getId();
-                        int helperId;
-                        ImageButton changedButton;
-                        Log.d("Id", "Id: " + id);
-                        currentGameState = currentGame.click(id / numberOfColumns, id % numberOfColumns);
-                        Log.d("Row, col", "Row, col; " + id / numberOfColumns + " " + id % numberOfColumns);
-                        for (FieldToDisplay field: currentGameState.fieldEvents) {
-                            helperId = field.row * numberOfColumns + field.col;
-                            changedButton = findViewById(helperId);
-                            switch (field.event) {
-                                case FLAG:
-                                    changedButton.setImageResource(R.drawable.flag);
-                                    break;
-                                case UNFLAG:
-                                    changedButton.setImageResource(R.drawable.blank);
-                                    break;
-                                case REVEAL_MINE:
-                                    changedButton.setImageResource(R.drawable.smiley_face);
-                                    break;
-                                default: // case REVEAL_NUMBER
-                                    switch (field.value) {
-                                        case 0:
-                                            changedButton.setImageResource(R.drawable.minesweeper_0);
-                                            break;
-                                        case 1:
-                                            changedButton.setImageResource(R.drawable.minesweeper_1);
-                                            break;
-                                        case 2:
-                                            changedButton.setImageResource(R.drawable.minesweeper_2);
-                                            break;
-                                        case 3:
-                                            changedButton.setImageResource(R.drawable.minesweeper_3);
-                                            break;
-                                        case 4:
-                                            changedButton.setImageResource(R.drawable.minesweeper_4);
-                                            break;
-                                        case 5:
-                                            changedButton.setImageResource(R.drawable.minesweeper_5);
-                                            break;
-                                        case 6:
-                                            changedButton.setImageResource(R.drawable.minesweeper_6);
-                                            break;
-                                        case 7:
-                                            changedButton.setImageResource(R.drawable.minesweeper_7);
-                                            break;
-                                        default: // case 8
-                                            changedButton.setImageResource(R.drawable.minesweeper_8);
-                                    }
-                            }
-                        }
-                        if (currentGameState.gameStatus != Game.GameStatus.PLAYING) {
-                            String mess = " ";
-                            if (currentGameState.gameStatus == Game.GameStatus.WON) {
-                                mess = "You won! Congratulations!";
-                            }
-                            else {
-                                mess = "You lost. Let's try again!";
-                            }
-                            Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+                button.setOnClickListener(this);
                 rowLayout.addView(button);
 
                 Log.d("MainActivity", "Button " + row + " " + column + " created with id " + button.getId());
             }
 
             boardView.addView(rowLayout);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        int helperId;
+        ImageButton changedButton;
+        Log.d("Id", "Id: " + id);
+        currentGameState = currentGame.click(id / numberOfColumns, id % numberOfColumns);
+        Log.d("Row, col", "Row, col; " + id / numberOfColumns + " " + id % numberOfColumns);
+        for (FieldToDisplay field : currentGameState.fieldEvents) {
+            helperId = field.row * numberOfColumns + field.col;
+            changedButton = findViewById(helperId);
+            switch (field.event) {
+                case FLAG:
+                    changedButton.setImageResource(R.drawable.flag);
+                    break;
+                case UNFLAG:
+                    changedButton.setImageResource(R.drawable.blank);
+                    break;
+                case REVEAL_MINE:
+                    changedButton.setImageResource(R.drawable.bomb);
+                    break;
+                default: // case REVEAL_NUMBER
+                    String valueToString = Integer.toString(field.value);
+                    String choice = "minesweeper_" + valueToString;
+                    int drawingId = getResources().getIdentifier(choice, "drawable", getPackageName());
+                    changedButton.setImageResource(drawingId);
+            }
+        }
+        if (currentGameState.gameStatus != Game.GameStatus.PLAYING) {
+            String mess;
+            if (currentGameState.gameStatus == Game.GameStatus.WON) {
+                mess = "You won! Congratulations!";
+            } else {
+                mess = "You lost. Let's try again!";
+            }
+            Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();
         }
     }
 }
