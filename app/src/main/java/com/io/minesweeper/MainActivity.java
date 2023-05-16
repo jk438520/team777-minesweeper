@@ -19,12 +19,12 @@ import com.io.minesweeper.game_engine.GameState;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    DisplayMetrics displayMetrics = new DisplayMetrics();
+    DisplayMetrics displayMetrics;
     int bombSaturation = 30;
     ImageButton setFlag;
     ImageButton restart;
     int numberOfColumns = 15;
-    int numberOfRows = numberOfColumns * displayMetrics.heightPixels / displayMetrics.widthPixels;
+    int numberOfRows = numberOfColumns * 16 / 9;
     int numberOfMines = numberOfColumns * numberOfRows * bombSaturation / 100;
     Game currentGame;
     GameState currentGameState;
@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        displayMetrics = new DisplayMetrics();
 
         Intent intent = getIntent();
         numberOfColumns = intent.getIntExtra("columns", 10);
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     changedButton.setImageResource(R.drawable.blank);
                     break;
                 case REVEAL_MINE:
-                    changedButton.setImageResource(R.drawable.smiley_face);
+                    changedButton.setImageResource(R.drawable.bomb);
                     break;
                 default: // case REVEAL_NUMBER
                     String valueToString = Integer.toString(field.value);
