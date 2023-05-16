@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="segment_display_clock_digit">#FF1D0C</color>
+    <color name="segment_display_clock_shadow">#63100B</color>
+    <color name="segment_display_background">#292828</color>
 </resources>
