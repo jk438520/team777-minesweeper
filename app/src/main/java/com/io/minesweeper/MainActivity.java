@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             else { // currentMode == Game.ClickMode.FLAG
                 currentGame.setClickMode(Game.ClickMode.BOMB);
-                ((ImageButton)v).setImageResource(R.drawable.blank);
+                ((ImageButton)v).setImageResource(R.drawable.bomb);
             }
         });
 
