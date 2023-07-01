@@ -4,6 +4,7 @@ import static com.io.minesweeper.game_engine.FieldToDisplay.FieldEvent;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -44,6 +45,11 @@ public class TestBoard {
             }
         }
         assertEquals(minesCountInGame, minesCount);
+    }
+
+    @Test
+    public void testToBeFailed() {
+        fail();
     }
 
 
