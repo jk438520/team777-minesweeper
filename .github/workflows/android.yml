@@ -17,12 +17,12 @@ jobs:
         with:
           distribution: temurin
           java-version: 11
-        
+
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
           cache-read-only: false
-      
+
       - name: Run Lint
         run: ./gradlew lint
 
@@ -40,17 +40,17 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
-      
+
       - uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 11
-        
+
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
         with:
           cache-read-only: false
-      
+
       - name: Run Debug Tests
         run: ./gradlew testDebug --continue
 
@@ -61,13 +61,18 @@ jobs:
           name: test-reports
           path: '**/build/reports/tests/'
 
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env: 
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
   emulator_test_job:
     name: Emulator tests
     runs-on: macos-latest
     steps:
       - name: checkout
         uses: actions/checkout@v3
-      
+
       - uses: actions/setup-java@v3
         with:
           distribution: temurin
@@ -78,7 +83,7 @@ jobs:
         with:
           gradle-version: 7.4.2
           cache-read-only: false
-        
+
       - name: AVD cache
         uses: actions/cache@v3
         id: avd-cache
