@@ -28,7 +28,6 @@ public class Game {
 
     private GameStatus gameStatus = GameStatus.PLAYING;
 
-    public GameState lastGameState = null;
 
     public Game(int width, int height, int allMines) {
         WIDTH = width;
@@ -62,16 +61,6 @@ public class Game {
         }
         ALL_MINES = tempAllMines;
         connectNeighbors();
-    }
-
-    public int getNumberOnField(int row, int column) {
-        int number = 0;
-        for(int i=-1; i<=1; i++)
-            for(int j=-1; j<=1; j++)
-                if(row+i >= 0 && row+i < HEIGHT && column+j >= 0 && column+j < WIDTH)
-                    if(fields[row+i][column+j].isMine())
-                        number++;
-        return number;
     }
 
 
@@ -141,10 +130,6 @@ public class Game {
                     break;
                 case REVEAL_MINE:
                     gameStatus = GameStatus.LOST;
-                    break;
-                case FLAG:
-                    break;
-                case UNFLAG:
                     break;
                 default:
                     break;

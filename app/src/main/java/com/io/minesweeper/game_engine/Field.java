@@ -27,12 +27,6 @@ public abstract class Field {
         return state;
     }
 
-    public void setState(State state) {
-        if(state != State.REVEALED) {
-            this.state = state;
-        }
-    }
-
     public void addNeighbour(Field neighbour){
         neighbours.add(neighbour);
     }
