@@ -1,6 +1,7 @@
 package com.io.minesweeper.game_engine;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -91,21 +92,22 @@ public class Game {
                 boolean isFlagged = fields[i][j].getState() == Field.State.FLAGGED;
                 if (ThreadLocalRandom.current().nextInt(0, fieldsToAssess) < minesToPlant) {
                     fields[i][j] = new Mine(i, j);
-                    if(isFlagged)
-                        fields[i][j].toggleFlag();
                     minesToPlant--;
+                } else {
+                    fields[i][j] = new EmptyField(i, j);
                 }
+                if(isFlagged)
+                    fields[i][j].toggleFlag();
                 fieldsToAssess--;
             }
         }
         connectNeighbors();
     }
     public GameState click(int row, int column){
-        GameState gs;
-        List<FieldToDisplay> ftd;
+        List<FieldToDisplay> ftd = new ArrayList<>();
         switch (clickMode) {
             case BOMB:
-                if(firstClick){
+                if(firstClick && fields[row][column].state == Field.State.HIDDEN){
                     generateMines(row, column);
                     firstClick = false;
                 }
@@ -117,9 +119,6 @@ public class Game {
                 else
                     ftd = fields[row][column].toggleFlag();
                 break;
-            default:
-                gs = new GameState(gameStatus);
-                return gs;
         }
         for(FieldToDisplay f : ftd){
             switch(f.event){

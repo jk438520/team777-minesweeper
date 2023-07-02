@@ -157,4 +157,16 @@ public class TestBoard {
         assertEquals(FieldEvent.UNFLAG, gs.fieldEvents.get(0).event);
     }
 
+    // test GameState constructor
+
+    @Test
+    public void testGameStateConstructor() {
+        GameState gs = new GameState(Game.GameStatus.PLAYING);
+        assertEquals(Game.GameStatus.PLAYING, gs.gameStatus);
+        assertEquals(0, gs.fieldEvents.size());
+        gs = new GameState(Game.GameStatus.LOST);
+        assertEquals(Game.GameStatus.LOST, gs.gameStatus);
+        assertEquals(0, gs.fieldEvents.size());
+    }
+
 }
