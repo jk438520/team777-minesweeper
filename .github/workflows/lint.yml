@@ -1,4 +1,4 @@
-name: Android Lint
+name: Lint
 
 on:
   workflow_dispatch:
