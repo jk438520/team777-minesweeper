@@ -28,80 +28,21 @@ For connected tests (run on android emulator) you can use:
 ```
 
 ### User - UI - Engine interface
+
+Interaction between UI and game engine is done using 2 methods. Game.click(row, column) and Game.setClickMode(...). 
+
+Game.click(row, column) returns GameState object that contains information about state of the game (PLAYING, WON, LOST) and collection of fields and values to which thoes fields have change after a click was registered.
+
+Game.setClickMode(...) doesn't return anything as it's assumed it has been succesfull.
+
 #### Interaction with fields
-```plantuml
-@startuml
 
-actor User as user
-participant "UI" as ui
-participant Game << (C,#ADD1B2) >>
+![field interaction UML](UMLs/field_interaction.png)
 
-
-skinparam actorStyle awesome
-
-loop until game ends or user restarts
-    user -> ui: click on (row, col)
-    ui -> Game: game.click(row, col)
-    Game -> ui: {{\nclass GameState{\n+int a\n~method()\n}\n}}
-    ui -> user: apply changes from GameState
-
-end 
-@enduml
-
-```
 #### GameState class
-```plantuml
-@startuml
 
-class GameState{
-    +gameStatus
-    +fieldEvents
-}
+![GameState class](UMLs/GameState.png)
 
-enum FieldEvent{
-    REVEAL_MINE
-    REVEAL_NUMBER
-    FLAG
-    UNFLAG
-}
-
-enum GameStatus{
-    PLAYING
-    WON
-    LOST
-}
-
-class FieldToDisplay{
-    +row
-    +col
-    +value
-    +event
-}
-
-
-GameStatus --> GameState::gameStatus
-FieldEvent --> FieldToDisplay::event
-FieldToDisplay --o GameState::fieldEvents
-@enduml
-
-```
 #### Interaction with flag toggle
-```plantuml
-@startuml
 
-actor User as user
-participant "UI" as ui
-participant Game << (C,#ADD1B2) >>
-
-
-skinparam actorStyle awesome
-
-loop until game ends or user restarts
-    user -> ui: click on toggle
-    ui -> Game: game.setClickMode(...)
-    ui -> user: change of icon
-end 
-@enduml
-
-```
-
+![toggle flag](UMLs/flag_toggle.png)

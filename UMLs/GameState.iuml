@@ -1,0 +1,32 @@
+@startuml
+
+class GameState{
+    +gameStatus
+    +fieldEvents
+}
+
+enum FieldEvent{
+    REVEAL_MINE
+    REVEAL_NUMBER
+    FLAG
+    UNFLAG
+}
+
+enum GameStatus{
+    PLAYING
+    WON
+    LOST
+}
+
+class FieldToDisplay{
+    +row
+    +col
+    +value
+    +event
+}
+
+
+GameStatus --> GameState::gameStatus
+FieldEvent --> FieldToDisplay::event
+FieldToDisplay --o GameState::fieldEvents
+@enduml
