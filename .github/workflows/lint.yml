@@ -5,8 +5,8 @@ on:
   push:
 
 jobs:
-  build:
-    name: Build
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -23,5 +23,12 @@ jobs:
         with:
           cache-read-only: false
       
-      - name: Build with gradlew
-        run: ./gradlew build
+      - name: Run Lint
+        run: ./gradlew lint
+
+      - name: Upload Lint Reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: lint-report
+          path: '**/build/reports/lint-results-*'
