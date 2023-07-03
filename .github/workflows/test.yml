@@ -1,4 +1,4 @@
-name: Android Lint and Test
+name: Android Tests
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    name: Emulator tests
+    name: Tests
     runs-on: macos-latest
     steps:
       - name: checkout
@@ -58,4 +58,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-reports
-          path: '**/build/reports/tests/'
+          path: '**/build/reports/'

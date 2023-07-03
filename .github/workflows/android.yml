@@ -1,4 +1,4 @@
-name: Android Lint and Test
+name: Android Build Check
 
 on:
   workflow_dispatch:
