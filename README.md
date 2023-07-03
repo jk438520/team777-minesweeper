@@ -1,7 +1,7 @@
 # Android minesweeper game
 [![Build](https://github.com/jk438520/team777-minesweeper/actions/workflows/android.yml/badge.svg)](https://github.com/jk438520/team777-minesweeper/actions/workflows/android.yml)
 [![Tests](https://github.com/jk438520/team777-minesweeper/actions/workflows/test.yml/badge.svg)](https://github.com/jk438520/team777-minesweeper/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/poker-io/pokerio-android/branch/main/graph/badge.svg?token=4QCZNOWFZJ)](https://codecov.io/gh/poker-io/pokerio-android)
+[![codecov](https://codecov.io/gh/jk438520/team777-minesweeper/branch/main/graph/badge.svg?token=1GOF3DNS2O)](https://codecov.io/gh/jk438520/team777-minesweeper)
 [![Lint](https://github.com/jk438520/team777-minesweeper/actions/workflows/lint.yml/badge.svg)](https://github.com/jk438520/team777-minesweeper/actions/workflows/lint.yml)
 
 
