@@ -29,7 +29,7 @@ For connected tests (run on android emulator) you can use:
 
 ### User - UI - Engine interface
 #### Interaction with fields
-```{uml}
+```plantuml
 @startuml
 
 actor User as user
@@ -50,7 +50,7 @@ end
 
 ```
 #### GameState class
-```{uml}
+```plantuml
 @startuml
 
 class GameState{
@@ -86,7 +86,7 @@ FieldToDisplay --o GameState::fieldEvents
 
 ```
 #### Interaction with flag toggle
-```{uml}
+```plantuml
 @startuml
 
 actor User as user
