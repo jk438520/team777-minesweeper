@@ -29,11 +29,16 @@ For connected tests (run on android emulator) you can use:
 
 ### User - UI - Engine interface
 
-Interaction between UI and game engine is done using 2 methods. Game.click(row, column) and Game.setClickMode(...). 
+Interaction between UI and game engine is done using 2 methods:
 
-Game.click(row, column) returns GameState object that contains information about state of the game (PLAYING, WON, LOST) and collection of fields and values to which thoes fields have change after a click was registered.
+```
+GameState Game.click(int row, int column);
+void Game.setClickMode(ClickMode clickMode);
+```
 
-Game.setClickMode(...) doesn't return anything as it's assumed it has been succesfull.
+`Game.click(int row, int column)` returns `GameState` object that contains information about state of the game (`PLAYING`, `WON`, `LOST`) and collection of fields and values to which those fields have to change after a click was registered.
+
+`Game.setClickMode(ClickMode clickMode)` doesn't return anything as it's assumed it has been succesfull.
 
 #### Interaction with fields
 

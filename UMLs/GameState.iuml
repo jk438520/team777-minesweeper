@@ -1,8 +1,8 @@
 @startuml
 
 class GameState{
-    +gameStatus
-    +fieldEvents
+    +GameStatus gameStatus
+    +List<FieldEvent> fieldEvents
 }
 
 enum FieldEvent{
@@ -19,10 +19,10 @@ enum GameStatus{
 }
 
 class FieldToDisplay{
-    +row
-    +col
-    +value
-    +event
+    +int row
+    +int col
+    +int value
+    +FieldEvent event
 }
 
 
