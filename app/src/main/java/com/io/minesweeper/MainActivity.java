@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -105,6 +103,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ));
 
                 button.setOnClickListener(this);
+                button.setOnLongClickListener(v -> {
+                    onLongClickHelper(v);
+                    return true;
+                });
                 rowLayout.addView(button);
 
                 Log.d("MainActivity", "Button " + row + " " + column + " created with id " + button.getId());
@@ -114,16 +116,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        chronometer.tileClick();
-        int id = view.getId();
+    private void applyGameStateChanges(GameState gameState) {
         int helperId;
         ImageButton changedButton;
-        Log.d("Id", "Id: " + id);
-        currentGameState = currentGame.click(id / numberOfColumns, id % numberOfColumns);
-        Log.d("Row, col", "Row, col; " + id / numberOfColumns + " " + id % numberOfColumns);
-        for (FieldToDisplay field : currentGameState.fieldEvents) {
+        for (FieldToDisplay field : gameState.fieldEvents) {
             helperId = field.row * numberOfColumns + field.col;
             changedButton = findViewById(helperId);
             switch (field.event) {
@@ -143,15 +139,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     changedButton.setImageResource(drawingId);
             }
         }
-        if (currentGameState.gameStatus != Game.GameStatus.PLAYING) {
+        if (gameState.gameStatus != Game.GameStatus.PLAYING) {
             chronometer.stop();
             String mess;
-            if (currentGameState.gameStatus == Game.GameStatus.WON) {
+            if (gameState.gameStatus == Game.GameStatus.WON) {
                 mess = "You won! Congratulations!";
             } else {
                 mess = "You lost. Let's try again!";
             }
             Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+        chronometer.tileClick();
+        int id = view.getId();
+
+        Log.d("Id", "Id: " + id);
+        currentGameState = currentGame.click(id / numberOfColumns, id % numberOfColumns);
+        Log.d("Row, col", "Row, col; " + id / numberOfColumns + " " + id % numberOfColumns);
+
+        applyGameStateChanges(currentGameState);
+    }
+
+    public void onLongClickHelper(View view) {
+        Log.d("", "Long click");
+        int id = view.getId();
+        Game.ClickMode previousClickMode = currentGame.getClickMode();
+
+        currentGame.setClickMode(Game.ClickMode.FLAG);
+        currentGameState = currentGame.click(id / numberOfColumns, id % numberOfColumns);
+        currentGame.setClickMode(previousClickMode);
+
+        applyGameStateChanges(currentGameState);
     }
 }
