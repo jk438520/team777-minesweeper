@@ -26,3 +26,28 @@ For connected tests (run on android emulator) you can use:
 ```
 ./gradlew connectedAndroidTest
 ```
+
+### User - UI - Engine interface
+
+Interaction between UI and game engine is done using 2 methods:
+
+```
+GameState Game.click(int row, int column);
+void Game.setClickMode(ClickMode clickMode);
+```
+
+`Game.click(int row, int column)` returns `GameState` object that contains information about state of the game (`PLAYING`, `WON`, `LOST`) and collection of fields and values to which those fields have to change after a click was registered.
+
+`Game.setClickMode(ClickMode clickMode)` doesn't return anything as it's assumed it has been succesfull.
+
+#### Interaction with fields
+
+![field interaction UML](UMLs/field_interaction.png)
+
+#### GameState class
+
+![GameState class](UMLs/GameState.png)
+
+#### Interaction with flag toggle
+
+![toggle flag](UMLs/flag_toggle.png)

@@ -1,0 +1,17 @@
+@startuml
+
+actor User as user
+participant "UI" as ui
+participant Game << (C,#ADD1B2) >>
+
+
+skinparam actorStyle awesome
+
+loop until game ends or user restarts
+    user -> ui: click on (row, col)
+    ui -> Game: game.click(row, col)
+    Game -> ui: {{\nclass GameState{\n+GameStatus status\n+List<FieldEvent> fieldEvents\n}\n}}
+    ui -> user: apply changes from GameState
+
+end 
+@enduml

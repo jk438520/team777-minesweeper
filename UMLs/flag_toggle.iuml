@@ -1,0 +1,15 @@
+@startuml
+
+actor User as user
+participant "UI" as ui
+participant Game << (C,#ADD1B2) >>
+
+
+skinparam actorStyle awesome
+
+loop until game ends or user restarts
+    user -> ui: click on toggle
+    ui -> Game: game.setClickMode(...)
+    ui -> user: change of icon
+end 
+@enduml
