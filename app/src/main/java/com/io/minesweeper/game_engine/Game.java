@@ -1,6 +1,7 @@
 package com.io.minesweeper.game_engine;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -28,7 +29,6 @@ public class Game {
 
     private GameStatus gameStatus = GameStatus.PLAYING;
 
-    public GameState lastGameState = null;
 
     public Game(int width, int height, int allMines) {
         WIDTH = width;
@@ -64,16 +64,6 @@ public class Game {
         connectNeighbors();
     }
 
-    public int getNumberOnField(int row, int column) {
-        int number = 0;
-        for(int i=-1; i<=1; i++)
-            for(int j=-1; j<=1; j++)
-                if(row+i >= 0 && row+i < HEIGHT && column+j >= 0 && column+j < WIDTH)
-                    if(fields[row+i][column+j].isMine())
-                        number++;
-        return number;
-    }
-
 
     public Field getField(int i, int j) {
         return fields[i][j];
@@ -102,21 +92,22 @@ public class Game {
                 boolean isFlagged = fields[i][j].getState() == Field.State.FLAGGED;
                 if (ThreadLocalRandom.current().nextInt(0, fieldsToAssess) < minesToPlant) {
                     fields[i][j] = new Mine(i, j);
-                    if(isFlagged)
-                        fields[i][j].toggleFlag();
                     minesToPlant--;
+                } else {
+                    fields[i][j] = new EmptyField(i, j);
                 }
+                if(isFlagged)
+                    fields[i][j].toggleFlag();
                 fieldsToAssess--;
             }
         }
         connectNeighbors();
     }
     public GameState click(int row, int column){
-        GameState gs;
-        List<FieldToDisplay> ftd;
+        List<FieldToDisplay> ftd = new ArrayList<>();
         switch (clickMode) {
             case BOMB:
-                if(firstClick){
+                if(firstClick && fields[row][column].state == Field.State.HIDDEN){
                     generateMines(row, column);
                     firstClick = false;
                 }
@@ -128,9 +119,6 @@ public class Game {
                 else
                     ftd = fields[row][column].toggleFlag();
                 break;
-            default:
-                gs = new GameState(gameStatus);
-                return gs;
         }
         for(FieldToDisplay f : ftd){
             switch(f.event){
@@ -141,10 +129,6 @@ public class Game {
                     break;
                 case REVEAL_MINE:
                     gameStatus = GameStatus.LOST;
-                    break;
-                case FLAG:
-                    break;
-                case UNFLAG:
                     break;
                 default:
                     break;

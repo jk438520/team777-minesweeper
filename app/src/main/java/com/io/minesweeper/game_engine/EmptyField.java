@@ -1,6 +1,5 @@
 package com.io.minesweeper.game_engine;
 
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +42,6 @@ public class EmptyField extends Field {
                         }
                     }
                 }
-                Log.d("REVEALED", "Click on revealed field, column: "+column+", row: "+row+
-                        "\nmines: " + mines + ", cnt: " + cnt);
                 return acc;
             case FLAGGED:
             default:
