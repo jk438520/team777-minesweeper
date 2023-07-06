@@ -38,7 +38,6 @@ jobs:
         with:
           api-level: 29
           force-avd-creation: false
-          profile: Pixel 3a
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: echo "Generated AVD snapshot for caching."
@@ -51,7 +50,6 @@ jobs:
         with:
           api-level: 29
           force-avd-creation: false
-          profile: Pixel 3a
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: ./gradlew createDebugAndroidTestCoverageReport  --continue
 
