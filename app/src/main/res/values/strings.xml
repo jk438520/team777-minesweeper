@@ -7,4 +7,18 @@
     <string name="flag_mode_toggle">Flag mode toggle</string>
     <string name="reset_button">Reset button</string>
     <string name="chronometerShadowText">88:88</string>
+    <string name="choose_number_of_fields_in_a_row">Choose number of fields in a row:</string>
+    <string name="decrease_number_of_fields">Decrease number of fields</string>
+    <string name="play">Play</string>
+    <string name="increase_mines_saturation">Increase mines saturation</string>
+    <string name="mines_saturation">Mines saturation</string>
+    <string name="decrease_mines_saturation">Decrease mines saturation</string>
+    <string name="choose_mines_saturation">Choose mines saturation:</string>
+    <string name="increase_number_of_fields">Increase number of fields</string>
+    <string name="number_of_fields">Number of fields</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="custom">Custom</string>
+    <string name="hello_and_welcome_to_minesweeper_please_choose_the_level">Hello and welcome to minesweeper! Please choose the level:</string>
 </resources>

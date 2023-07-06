@@ -31,10 +31,10 @@ android:fillViewport="true">
             android:id="@+id/colDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#000"
+            android:background="@drawable/rounded_corners_purple"
             android:padding="10dp"
             android:layout_marginBottom="30dp"
-            android:text="Choose number of fields in a row:"
+            android:text="@string/choose_number_of_fields_in_a_row"
             android:textAlignment="center"
             android:textColor="#fff"
             android:textSize="30sp" />
@@ -56,10 +56,10 @@ android:fillViewport="true">
                 android:layout_weight="1"
                 android:padding="0dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/blank"
+                android:src="@drawable/minus"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="Decrease number of fields"/>
+                android:contentDescription="@string/decrease_number_of_fields"/>
 
             <TextView
                 android:id="@+id/colValue"
@@ -67,7 +67,7 @@ android:fillViewport="true">
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:padding="0dp"
-                android:background="#FFFFFF"
+                android:background="@drawable/rounded_corners_grey"
                 android:gravity="center"
                 android:textSize="30sp"
                 android:textColor="@color/black"
@@ -75,7 +75,7 @@ android:fillViewport="true">
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/colMinus"
                 app:layout_constraintEnd_toStartOf="@+id/colPlus"
-                android:contentDescription="Number of fields" />
+                android:contentDescription="@string/number_of_fields" />
 
             <ImageButton
                 android:id="@+id/colPlus"
@@ -84,10 +84,10 @@ android:fillViewport="true">
                 android:layout_weight="1"
                 android:padding="0dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/smiley_face"
+                android:src="@drawable/plus"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="Increase number of fields" />
+                android:contentDescription="@string/increase_number_of_fields" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -95,11 +95,11 @@ android:fillViewport="true">
             android:id="@+id/satDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#000"
+            android:background="@drawable/rounded_corners_purple"
             android:padding="10dp"
             android:layout_marginBottom="30dp"
             android:layout_marginTop="30dp"
-            android:text="Choose mines saturation:"
+            android:text="@string/choose_mines_saturation"
             android:textAlignment="center"
             android:textColor="#fff"
             android:textSize="30sp" />
@@ -121,10 +121,10 @@ android:fillViewport="true">
                 android:layout_weight="1"
                 android:padding="0dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/blank"
+                android:src="@drawable/minus"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="Decrease mines saturation" />
+                android:contentDescription="@string/decrease_mines_saturation" />
 
             <TextView
                 android:id="@+id/satValue"
@@ -132,7 +132,7 @@ android:fillViewport="true">
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:padding="0dp"
-                android:background="#FFFFFF"
+                android:background="@drawable/rounded_corners_grey"
                 android:gravity="center"
                 android:textSize="30sp"
                 android:textColor="@color/black"
@@ -140,7 +140,7 @@ android:fillViewport="true">
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/satMinus"
                 app:layout_constraintEnd_toStartOf="@+id/satPlus"
-                android:contentDescription="Mines saturation" />
+                android:contentDescription="@string/mines_saturation" />
 
             <ImageButton
                 android:id="@+id/satPlus"
@@ -149,10 +149,10 @@ android:fillViewport="true">
                 android:layout_weight="1"
                 android:padding="0dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/smiley_face"
+                android:src="@drawable/plus"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="Increase mines saturation" />
+                android:contentDescription="@string/increase_mines_saturation" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -162,7 +162,7 @@ android:fillViewport="true">
             android:layout_height="wrap_content"
             android:width="200dp"
             android:height="70dp"
-            android:text="Play"
+            android:text="@string/play"
             android:textSize="30sp"
             android:layout_margin="30dp"
             android:layout_gravity="center_horizontal" />

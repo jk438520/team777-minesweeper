@@ -45,9 +45,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="#000"
+                android:background="@drawable/rounded_corners_purple"
                 android:padding="10dp"
-                android:text="Hello and welcome to minesweeper! Please choose the level:"
+                android:text="@string/hello_and_welcome_to_minesweeper_please_choose_the_level"
                 android:textAlignment="center"
                 android:textColor="#fff"
                 android:textSize="30sp" />
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:width="200dp"
                 android:height="70dp"
-                android:text="Easy"
+                android:text="@string/easy"
                 android:textSize="30sp"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="15dp"
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:width="200dp"
                 android:height="70dp"
-                android:text="Medium"
+                android:text="@string/medium"
                 android:textSize="30sp"
                 android:layout_margin="15dp"
                 android:layout_gravity="center_horizontal" />
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:width="200dp"
                 android:height="70dp"
-                android:text="Hard"
+                android:text="@string/hard"
                 android:textSize="30sp"
                 android:layout_margin="15dp"
                 android:layout_gravity="center_horizontal" />
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:width="200dp"
                 android:height="70dp"
-                android:text="Custom"
+                android:text="@string/custom"
                 android:textSize="30sp"
                 android:layout_margin="15dp"
                 android:layout_gravity="center_horizontal" />
