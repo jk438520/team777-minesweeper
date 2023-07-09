@@ -1,23 +1,36 @@
+
+
+<p>
+    <a href="https://github.com/MagdaCzapiewska"><strong>Magdalena Czapiewska</strong></a>
+    ·
+    <a href="https://github.com/jk438520"><strong>Jakub Kłos</strong></a>
+    ·
+    <a href="https://github.com/Klosiu889"><strong>Jakub Kołaczyński</strong></a>
+    ·
+    <a href="https://github.com/wojtek-rz"><strong>Wojciech Rzepliński</strong></a>
+</p>
+
 # Android minesweeper game
+
 [![Build](https://github.com/jk438520/team777-minesweeper/actions/workflows/android.yml/badge.svg)](https://github.com/jk438520/team777-minesweeper/actions/workflows/android.yml)
 [![Tests](https://github.com/jk438520/team777-minesweeper/actions/workflows/test.yml/badge.svg)](https://github.com/jk438520/team777-minesweeper/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/jk438520/team777-minesweeper/branch/main/graph/badge.svg?token=1GOF3DNS2O)](https://codecov.io/gh/jk438520/team777-minesweeper)
 [![Lint](https://github.com/jk438520/team777-minesweeper/actions/workflows/lint.yml/badge.svg)](https://github.com/jk438520/team777-minesweeper/actions/workflows/lint.yml)
 
 
-Simple Android minesweeper game written in Java.
-
 ## Gradle commands
 
-### Lint check
+### Build
 
-You can run code inspections from command line using:
+You can build project from command line using:
 ```
-./gradlew lint
+./gradlew build
 ```
-Or you can do it manually by clicking in Android Studio: ___Code > Inspect Code___.
-
-For more information check [lint guidelines](https://developer.android.com/studio/write/lint.html).
+To create apk use:
+```
+./gradlew assemble
+```
+For more info check [Android Studio website](https://developer.android.com/build/building-cmdline):
 
 ### Tests
 
@@ -32,7 +45,17 @@ For connected tests (run on android emulator) you can use:
 ./gradlew connectedAndroidTest
 ```
 
-### User - UI - Engine interface
+### Lint check
+
+You can run code inspections from command line using:
+```
+./gradlew lint
+```
+Or you can do it manually by clicking in Android Studio: ___Code > Inspect Code___.
+
+For more information check [lint guidelines](https://developer.android.com/studio/write/lint.html).
+
+## User - UI - Engine interface
 
 Interaction between UI and game engine is done using 2 methods:
 
