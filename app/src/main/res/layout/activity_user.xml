@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".LevelActivity">
+    tools:context=".UserActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -44,56 +44,49 @@
                 android:id="@+id/simpleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@drawable/rounded_corners_purple"
+                android:background="#000"
                 android:padding="10dp"
-                android:text="@string/please_choose_the_level"
+                android:text="@string/hello_and_welcome_to_minesweeper"
                 android:textAlignment="center"
                 android:textColor="#fff"
                 android:textSize="30sp" />
 
             <Button
-                android:id="@+id/easy"
+                android:id="@+id/sign_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:width="200dp"
-                android:height="70dp"
-                android:text="@string/easy"
-                android:textSize="30sp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="15dp"
-                android:layout_gravity="center_horizontal" />
-
+                android:width="300dp"
+                android:height="110dp"
+                android:backgroundTint="#800080"
+                android:onClick="sign_up_activity"
+                android:text="@string/sign_in_or_sign_up"
+                android:textSize="30sp" />
 
             <Button
-                android:id="@+id/medium"
+                android:id="@+id/play_anonymously"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:width="200dp"
-                android:height="70dp"
-                android:text="@string/medium"
+                android:backgroundTint="#800080"
+                android:width="300dp"
+                android:height="110dp"
+                android:onClick="play_anonymously_activity"
+                android:text="@string/play_anonymously"
                 android:textSize="30sp"
                 android:layout_margin="15dp"
                 android:layout_gravity="center_horizontal" />
 
             <Button
-                android:id="@+id/hard"
+                android:id="@+id/show_ranking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:width="200dp"
-                android:height="70dp"
-                android:text="@string/hard"
-                android:textSize="30sp"
-                android:layout_margin="15dp"
-                android:layout_gravity="center_horizontal" />
-
-            <Button
-                android:id="@+id/custom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:width="200dp"
-                android:height="70dp"
-                android:text="@string/custom"
+                android:backgroundTint="#800080"
+                android:width="300dp"
+                android:height="110dp"
+                android:onClick="show_ranking_activity"
+                android:text="@string/show_ranking"
                 android:textSize="30sp"
                 android:layout_margin="15dp"
                 android:layout_gravity="center_horizontal" />
