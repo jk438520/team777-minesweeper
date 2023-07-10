@@ -56,7 +56,7 @@
         android:id="@+id/btn_del"
         android:layout_width="150dp"
         android:layout_height="70dp"
-        android:text="@string/delete_somebody"
+        android:text="@string/delete_account"
         app:layout_constraintEnd_toStartOf="@+id/btn_play"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/users_scroll" />

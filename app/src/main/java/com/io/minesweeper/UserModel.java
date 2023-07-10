@@ -12,7 +12,7 @@ public class UserModel {
 
     public UserModel(int id, String name) {
         this.id = id;
-        this.name = name;
+        this.name = name.toUpperCase();
         this.hard_score = MILLISECONDS_IN_2_HOURS;
         this.medium_score = MILLISECONDS_IN_2_HOURS;
         this.easy_score = MILLISECONDS_IN_2_HOURS;
@@ -20,7 +20,7 @@ public class UserModel {
 
     public UserModel(int id, String name, long hard_score, long medium_score, long easy_score) {
         this.id = id;
-        this.name = name;
+        this.name = name.toUpperCase();
         this.hard_score = hard_score;
         this.medium_score = medium_score;
         this.easy_score = easy_score;
