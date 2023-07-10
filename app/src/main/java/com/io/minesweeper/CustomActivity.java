@@ -15,11 +15,22 @@ public class CustomActivity extends AppCompatActivity {
 
     int colVal = 10;
     int satVal = 20;
+    int id_to_pass = 0;
+    String name_to_pass = "None";
+    String level_to_pass = "None";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom);
+
+        Intent intent = getIntent();
+        id_to_pass = intent.getIntExtra("user_id", 0);
+        name_to_pass = intent.getStringExtra("user_name");
+        if (name_to_pass == null) {
+            name_to_pass = "None";
+        }
+        level_to_pass = "None";
 
         ImageButton colMinus = findViewById(R.id.colMinus);
         ImageButton colPlus = findViewById(R.id.colPlus);
@@ -72,9 +83,12 @@ public class CustomActivity extends AppCompatActivity {
             int rowVal = colVal * 3 / 2;
 
             Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("user_name", name_to_pass);
+            i.putExtra("user_id", id_to_pass);
             i.putExtra("columns", colVal);
             i.putExtra("rows", rowVal);
             i.putExtra("bombSaturation", satVal);
+            i.putExtra("level", level_to_pass);
 
             startActivity(i);
         });

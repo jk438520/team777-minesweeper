@@ -16,6 +16,8 @@ import com.io.minesweeper.game_engine.FieldToDisplay;
 import com.io.minesweeper.game_engine.Game;
 import com.io.minesweeper.game_engine.GameState;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     DisplayMetrics displayMetrics;
@@ -25,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int numberOfColumns = 15;
     int numberOfRows = numberOfColumns * 16 / 9;
     int numberOfMines = numberOfColumns * numberOfRows * bombSaturation / 100;
+    int user_id = 0;
+    String user_name = "None";
+    String level = "None";
     Game currentGame;
     GameState currentGameState;
 
@@ -43,6 +48,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         numberOfRows = intent.getIntExtra("rows", 14);
         numberOfMines = intent.getIntExtra("bombSaturation", 20)
                         * numberOfColumns * numberOfRows / 100;
+        user_id = intent.getIntExtra("user_id", 0);
+        user_name = intent.getStringExtra("user_name");
+        level = intent.getStringExtra("level");
+
+        Toast.makeText(this, "User_id: " + Integer.toString(user_id) + ", user_name: " + user_name, Toast.LENGTH_SHORT).show();
 
         currentGame = new Game(numberOfColumns, numberOfRows, numberOfMines);
         currentGameState = new GameState(currentGame.getGameStatus());
@@ -143,8 +153,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             chronometer.stop();
             String mess;
             if (gameState.gameStatus == Game.GameStatus.WON) {
+                Log.d("Time: ", Long.toString(chronometer.getTimeInMillis()));
+                Log.d("Level: ", level);
+                if (user_id != 0 && !Objects.equals(level, "None") && level != null) {
+                    DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivity.this);
+                    dataBaseHelper.updateTime(user_id, chronometer.getTimeInMillis(), level);
+                }
                 mess = "You won! Congratulations!";
             } else {
+                Log.d("Time: ", Long.toString(chronometer.getTimeInMillis()));
+                Log.d("Level: ", level);
                 mess = "You lost. Let's try again!";
             }
             Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();

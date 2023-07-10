@@ -20,5 +20,17 @@
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
     <string name="custom">Custom</string>
-    <string name="hello_and_welcome_to_minesweeper_please_choose_the_level">Hello and welcome to minesweeper! Please choose the level:</string>
+    <string name="please_choose_the_level">Please choose the level:</string>
+    <string name="username">New user\'s name</string>
+    <string name="hello_and_welcome_to_minesweeper">Hello and welcome to minesweeper!</string>
+    <string name="sign_in_or_sign_up">Sign in or sign up</string>
+    <string name="play_anonymously">Play anonymously</string>
+    <string name="show_ranking">Show ranking</string>
+    <string name="ranking">Ranking</string>
+    <string name="Hard">Hard</string>
+    <string name="Medium">Medium</string>
+    <string name="Easy">Easy</string>
+    <string name="add">Add</string>
+    <string name="delete_somebody">Delete somebody</string>
+    <string name="Play">Play</string>
 </resources>
