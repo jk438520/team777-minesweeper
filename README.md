@@ -3,9 +3,9 @@
 <p>
     <a href="https://github.com/MagdaCzapiewska"><strong>Magdalena Czapiewska</strong></a>
     ·
-    <a href="https://github.com/jk438520"><strong>Jakub Kłos</strong></a>
+    <a href="https://github.com/Klosiu889"><strong>Jakub Kłos</strong></a>
     ·
-    <a href="https://github.com/Klosiu889"><strong>Jakub Kołaczyński</strong></a>
+    <a href="https://github.com/jk438520"><strong>Jakub Kołaczyński</strong></a>
     ·
     <a href="https://github.com/wojtek-rz"><strong>Wojciech Rzepliński</strong></a>
 </p>
