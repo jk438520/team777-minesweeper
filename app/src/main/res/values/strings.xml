@@ -21,4 +21,6 @@
     <string name="hard">Hard</string>
     <string name="custom">Custom</string>
     <string name="hello_and_welcome_to_minesweeper_please_choose_the_level">Hello and welcome to minesweeper! Please choose the level:</string>
+    <string name="game_won_toast">"You won! Congratulations!"</string>
+    <string name="game_lost_toast"> "You lost. Let's try again!"</string>
 </resources>

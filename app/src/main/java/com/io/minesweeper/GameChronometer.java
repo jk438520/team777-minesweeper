@@ -58,6 +58,10 @@ public class GameChronometer {
         }
     }
 
+    public boolean isRunning() {
+        return isRunning;
+    }
+
 
     public long getTimeInMillis() {
         return timeInMillis;
