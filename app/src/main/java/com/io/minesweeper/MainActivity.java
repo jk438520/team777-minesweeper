@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -151,19 +153,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (gameState.gameStatus != Game.GameStatus.PLAYING) {
             chronometer.stop();
-            String mess;
-            if (gameState.gameStatus == Game.GameStatus.WON) {
+            int mess;
+            if (currentGameState.gameStatus == Game.GameStatus.WON) {
                 Log.d("Time: ", Long.toString(chronometer.getTimeInMillis()));
                 Log.d("Level: ", level);
                 if (user_id != 0 && !Objects.equals(level, "None") && level != null) {
                     DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivity.this);
                     dataBaseHelper.updateTime(user_id, chronometer.getTimeInMillis(), level);
                 }
-                mess = "You won! Congratulations!";
+                mess = R.string.game_won_toast;
             } else {
                 Log.d("Time: ", Long.toString(chronometer.getTimeInMillis()));
                 Log.d("Level: ", level);
-                mess = "You lost. Let's try again!";
+                mess = R.string.game_lost_toast;
             }
             Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();
         }

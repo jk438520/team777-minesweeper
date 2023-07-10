@@ -33,4 +33,6 @@
     <string name="add">Add</string>
     <string name="delete_account">Delete account</string>
     <string name="Play">Play</string>
+    <string name="game_won_toast">"You won! Congratulations!"</string>
+    <string name="game_lost_toast"> "You lost. Let's try again!"</string>
 </resources>
