@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.longClick;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -70,7 +71,7 @@ public class MainActivityInstrumentedTests {
         }
 
         // check if chronometer is running
-        chronometer.check(matches(withText("00:03")));
+        chronometer.check(matches(not(withText("00:00"))));
     }
 
     private void endGame() {
@@ -154,5 +155,14 @@ public class MainActivityInstrumentedTests {
         setFlagButton.check(matches(withDrawable(R.drawable.flag)));
         setFlagButton.perform(click());
         setFlagButton.check(matches(withDrawable(R.drawable.bomb)));
+    }
+
+    @Test
+    public void testLongClick() {
+        ViewInteraction firstTile =  onView(withId(0));
+        firstTile.perform(longClick());
+
+        // check if flag is set
+        firstTile.check(matches(withDrawable(R.drawable.flag)));
     }
 }

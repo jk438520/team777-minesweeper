@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             int mess;
             if (currentGameState.gameStatus == Game.GameStatus.WON) {
                 Log.d("Time: ", Long.toString(chronometer.getTimeInMillis()));
-                Log.d("Level: ", level);
+                if (level != null) Log.d("Level: ", level);
                 if (user_id != 0 && !Objects.equals(level, "None") && level != null) {
                     DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivity.this);
                     dataBaseHelper.updateTime(user_id, chronometer.getTimeInMillis(), level);
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mess = R.string.game_won_toast;
             } else {
                 Log.d("Time: ", Long.toString(chronometer.getTimeInMillis()));
-                Log.d("Level: ", level);
+                if (level != null) Log.d("Level: ", level);
                 mess = R.string.game_lost_toast;
             }
             Toast.makeText(getApplicationContext(), mess, Toast.LENGTH_SHORT).show();
