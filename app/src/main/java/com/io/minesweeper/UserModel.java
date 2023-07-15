@@ -6,24 +6,24 @@ public class UserModel {
 
     private int id;
     private String name;
-    private long hard_score;
-    private long medium_score;
-    private long easy_score;
+    private long hardScore;
+    private long mediumScore;
+    private long easyScore;
 
     public UserModel(int id, String name) {
         this.id = id;
         this.name = name.toUpperCase();
-        this.hard_score = MILLISECONDS_IN_2_HOURS;
-        this.medium_score = MILLISECONDS_IN_2_HOURS;
-        this.easy_score = MILLISECONDS_IN_2_HOURS;
+        this.hardScore = MILLISECONDS_IN_2_HOURS;
+        this.mediumScore = MILLISECONDS_IN_2_HOURS;
+        this.easyScore = MILLISECONDS_IN_2_HOURS;
     }
 
-    public UserModel(int id, String name, long hard_score, long medium_score, long easy_score) {
+    public UserModel(int id, String name, long hardScore, long mediumScore, long easyScore) {
         this.id = id;
         this.name = name.toUpperCase();
-        this.hard_score = hard_score;
-        this.medium_score = medium_score;
-        this.easy_score = easy_score;
+        this.hardScore = hardScore;
+        this.mediumScore = mediumScore;
+        this.easyScore = easyScore;
     }
 
     @Override
@@ -31,9 +31,9 @@ public class UserModel {
         return "UserModel{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", hard_score=" + hard_score +
-                ", medium_score=" + medium_score +
-                ", easy_score=" + easy_score +
+                ", hardScore=" + hardScore +
+                ", mediumScore=" + mediumScore +
+                ", easyScore=" + easyScore +
                 '}';
     }
 
@@ -54,26 +54,26 @@ public class UserModel {
     }
 
     public long getHardScore() {
-        return hard_score;
+        return hardScore;
     }
 
-    public void setHardScore(long hard_score) {
-        this.hard_score = hard_score;
+    public void setHardScore(long hardScore) {
+        this.hardScore = hardScore;
     }
 
     public long getMediumScore() {
-        return medium_score;
+        return mediumScore;
     }
 
-    public void setMediumScore(long medium_score) {
-        this.medium_score = medium_score;
+    public void setMediumScore(long mediumScore) {
+        this.mediumScore = mediumScore;
     }
 
     public long getEasyScore() {
-        return easy_score;
+        return easyScore;
     }
 
-    public void setEasyScore(long easy_score) {
-        this.easy_score = easy_score;
+    public void setEasyScore(long easyScore) {
+        this.easyScore = easyScore;
     }
 }
