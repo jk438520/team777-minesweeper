@@ -12,7 +12,7 @@ import com.io.minesweeper.UserModel;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class UserModelTest {
 
     @Test
     public void autoTestGettersSetters() {
