@@ -43,7 +43,7 @@ public class UserModelTest {
                 setterMethod.invoke(instance, testVal);
                 Object result = getterMethod.invoke(instance);
                 System.out.printf("Testing class=%s field=%s...\n", aClass.getName(), f.getName());
-                assertThat(result).as("in class %s fields %s", aClass.getName(), f.getName()).isEqualTo(testVal);
+                assertTrue(result.as("in class %s fields %s", aClass.getName(), f.getName()).isEqualTo(testVal));
                 }
         } catch(Exception e) {
            System.out.println(e.toString());
