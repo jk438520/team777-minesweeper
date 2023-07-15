@@ -6,9 +6,9 @@ public class UserModel {
 
     private Integer id;
     private String name;
-    private Integer hardScore;
-    private Integer mediumScore;
-    private Integer easyScore;
+    private Long hardScore;
+    private Long mediumScore;
+    private Long easyScore;
 
     public UserModel(int id, String name) {
         this.id = id;
