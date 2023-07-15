@@ -4,11 +4,11 @@ public class UserModel {
 
     static final long MILLISECONDS_IN_2_HOURS = 7200000;
 
-    private int id;
+    private Integer id;
     private String name;
-    private long hardScore;
-    private long mediumScore;
-    private long easyScore;
+    private Integer hardScore;
+    private Integer mediumScore;
+    private Integer easyScore;
 
     public UserModel(int id, String name) {
         this.id = id;
