@@ -10,6 +10,14 @@ public class UserModel {
     private Long mediumScore;
     private Long easyScore;
 
+    public UserModel() {
+        this.id = 0;
+        this.name = "";
+        this.hardScore = MILLISECONDS_IN_2_HOURS;
+        this.mediumScore = MILLISECONDS_IN_2_HOURS;
+        this.easyScore = MILLISECONDS_IN_2_HOURS;
+    }
+
     public UserModel(int id, String name) {
         this.id = id;
         this.name = name.toUpperCase();
